@@ -1,0 +1,240 @@
+Assignment-1
+~~~~~~~~~~~~~
+a. What is the regular expressions to validate vehicle registration number (Eg:   TS10AB1234 )
+->
+A regular expression, often abbreviated as "regex", is a sequence of characters that define a search pattern. It's a powerful tool used for matching patterns in strings. 
+
+Example to validate vechile registration number is:
+
+
+let regNumber = "TS10AB1234";
+let regex = /^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/;
+
+if (regex.test(regNumber)) {
+    console.log("Valid vehicle registration number");
+} else {
+    console.log("Invalid vehicle registration number");
+}
+
+ 
+
+b. What are data structure? Why do we need?
+
+-> a data structure is a way of organizing and storing data in a computer so that it can be accessed and manipulated efficiently. Data structures provide a means to manage and organize data in a systematic and efficient manner,
+ allowing for various operations such as insertion, deletion, searching, sorting, and traversal.
+
+why do we need:
+
+->
+Data structures are essential in computer science and programming for several reasons:
+
+Organization of Data: Data structures provide a way to organize and structure data in a logical and efficient manner. They enable us to store, 
+retrieve, and manipulate data effectively, making it easier to manage large volumes of information.
+
+Efficient Data Access: Different data structures are optimized for different types of operations. For example, arrays provide fast random access to elements, 
+while linked lists are efficient for insertions and deletions. By choosing the appropriate data structure, we can perform operations on data more efficiently.
+
+Optimized Algorithms: Many algorithms rely on specific data structures to achieve optimal performance. For example
+, sorting algorithms like quicksort or mergesort often perform better when used with certain data structures like arrays or trees.
+
+Memory Management: Data structures help in efficient memory management by allocating memory dynamically and deallocating it when it's no longer needed.
+ This helps prevent memory leaks and ensures that resources are used effectively.
+
+Abstraction and Encapsulation: Data structures provide a level of abstraction that allows programmers to work with data at a higher conceptual level,
+ without needing to understand the underlying implementation details. This makes programs easier to understand, maintain, and modify.
+
+Problem Solving: Many computational problems can be solved more efficiently using the appropriate data structures. For example, problems involving searching, 
+sorting, graph traversal, and dynamic programming often require the use of specific data structures to achieve optimal solutions.
+
+Scalability: As the size of data grows, the choice of data structure becomes increasingly important for maintaining performance and scalability. 
+Using the right data structure can help ensure that programs remain efficient even as data volumes increase.
+
+
+c. What are the applications of stack and queue in real-time applications?
+->Applications of Stacks:
+
+Function Call Stack: Stacks are commonly used in programming languages to manage function calls and local variables. When a function is called,
+ its parameters and local variables are pushed onto the stack, and when the function returns, they are popped off the stack.
+
+Expression Evaluation: Stacks are used in evaluating arithmetic expressions, parsing, and converting infix expressions to postfix or prefix notation. For example,
+ the postfix notation is evaluated using a stack-based algorithm.
+
+Undo Mechanism: Many applications implement an undo mechanism using a stack. Each operation that modifies the state of the application is pushed onto a stack,
+ allowing users to undo operations by popping them off the stack.
+
+Backtracking Algorithms: Backtracking algorithms, such as depth-first search (DFS), often use stacks to maintain a record of the current state and backtrack when necessary to explore alternative paths.
+
+Memory Management: Stacks are used in memory management to allocate and deallocate memory for local variables and function calls. For example,
+ the call stack in operating systems manages function calls and their associated memory.
+
+Applications of Queues:
+
+Job Scheduling: Queues are used in job scheduling systems to manage tasks or jobs that need to be processed in a first-come, first-served order.
+ For example, in operating systems, the print queue manages print jobs.
+
+Breadth-First Search (BFS): BFS algorithm, used in graph traversal, employs queues to explore neighboring nodes level by level.
+ It is widely used in network routing, social network analysis, and web crawling.
+
+Message Queues: Queues are used in messaging systems to facilitate communication between different components or processes.
+ Messages are enqueued by one process and dequeued by another process for processing.
+
+Buffering: Queues are used for buffering data in systems where the producer and consumer operate at different speeds. For example, 
+in data streaming applications, data is buffered in a queue before being processed.
+
+Traffic Management: Queues are used in traffic management systems to control the flow of vehicles at intersections or toll booths.
+ Vehicles wait in queues until it's their turn to proceed.
+
+Task Scheduling: In real-time systems, queues are used to schedule tasks or events based on their priority or deadline. 
+Tasks with higher priority are dequeued and executed before lower priority tasks.
+
+Assignment -2
+
+
+
+
+
+a.  Create a node program to implement the following requirement using queue:
+			--  program need to handle customer requests
+			--  each request should contain customer name, customer id , contact number, request description, requet date and time
+			--  use queue concept to add, remove, display the requests
+
+
+const { Queue } = require("@datastructures-js/queue");
+
+let customerReq1 = {
+  name: "nitish",
+  id: 1,
+  contactNumber: "98806354647",
+  reqDesc: "provide me the product",
+  reqDate: "2023-03-08",
+  time: "12-44-22",
+};
+let customerReq2 = {
+  name: "santosh",
+  id: 2,
+  contactNumber: "467493843793",
+  reqDesc: "improve ur packaging",
+  reqDate: "2013-05-08",
+  time: "09-55-23",
+};
+
+const customerQueue = new Queue();
+
+// Add requests to the queue
+customerQueue.enqueue(customerReq1);
+customerQueue.enqueue(customerReq2);
+
+// Remove a request from the queue
+customerQueue.dequeue();
+
+console.log("-----------displaying queue-----------");
+let custArr = customerQueue.toArray();
+for (item of custArr) {
+  console.log(item);
+}
+
+
+	
+b.    Create a node program to implement the following requirement using stack:
+
+			---  program need to handle browser history details 
+			--  each entry should contain url, date and time, 
+			--  perform add, remove, display the request details 
+
+
+
+const { Stack } = require("@datastructures-js/stack");
+
+let browserDetail1 = {
+  url: "www.google.com",
+  date: "2023-01-01",
+  time: "01-44-03",
+};
+
+let browserDetail2 = {
+  url: "www.amazon.com",
+  date: "2023-04-04",
+  time: "12-44-05",
+};
+
+const browserStack = new Stack();
+
+browserStack.push(browserDetail1);
+browserStack.push(browserDetail2);
+
+console.log("Browser history details before popping:");
+displayBrowserHistory(browserStack);
+
+const poppedDetail2 = browserStack.pop();
+const poppedDetail1 = browserStack.pop();
+
+console.log("\nBrowser history details after popping:");
+displayBrowserHistory(browserStack);
+
+function displayBrowserHistory(stack) {
+  if (stack.isEmpty()) {
+    console.log("Browser history is empty");
+    return;
+  }
+
+  const historyArray = stack.toArray().reverse();
+  historyArray.forEach((detail, index) => {
+    console.log(
+      `${index + 1}. URL: ${detail.url}, Date: ${detail.date}, Time: ${
+        detail.time
+      }`
+    );
+  });
+}
+
+
+
+
+// Assignment-3
+// ~~~~~~~~~~~~
+// 	--> Create a node program to process flight details using Map collections. 
+	
+// 		a.  need to store the details :		flight numbers and corresponding details :   source, destination, date, time 
+// 		b.  take a variable that holds the flight number and  find the status of the flight. 
+
+// 		Eg:      input variable hold the flight number:  'AR456' 
+// 					Output :   The Flight AR456 is leaving at 18.00 from Hyderabad to Bangalore 
+					
+				 
+// 					Hint :  If flight already left, display the corresponding message
+// 								If invalid flight, display the corresponding message. 
+const flightMap = new Map();
+flightMap.set("AR456",["delhi","mumbai","24-03-2024","12:10:53"]);
+flightMap.set("AR458",["delhi","hyderabad","25-03-2024","22:10:53"]);
+flightMap.set("AR460",["delhi","hyderabad","10-04-2024","22:10:53"]);
+// console.log(flightMap.get("AR456"));
+
+exports.mapFlightinfo =function(flightItem){
+    let res=flightMap.get(flightItem);
+    if(res==undefined){
+        console.log("wrong flight number");
+    }
+    else{
+        console.log(`flight number ${flightItem} from ${res[0]} to ${res[1]} is scheduled to depart on ${res[2]} at ${res[3]} `);
+    }
+    
+}
+exports.mapFlightStatus = function(flightItem,currdate,currtime){
+    let res=flightMap.get(flightItem);
+    if(res==undefined){
+        console.log("wrong flight number");
+        return;
+    }
+    else{
+        if(res[2]<=currdate || res[3]<=currtime){
+            console.log("flight already left");
+        }
+        console.log(`flight number ${flightItem} from ${res[0]} to ${res[1]} is scheduled to depart on ${res[2]} at ${res[3]} `);
+    }
+    
+
+}
+
+
+
+
