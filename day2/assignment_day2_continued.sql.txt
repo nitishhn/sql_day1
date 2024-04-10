@@ -1,0 +1,135 @@
+1. What is Views in MySql?  Why do we use Views? How to create views in MySql?
+-> 
+In MySQL, views are virtual tables that represent the result set of a SELECT query. They are not storedas a part of the database schema like physical tables.
+ instead, they are dynamically generated each time they are queried.
+There are several reasons why we use views in mySQL :
+1. They help in simplyfying complex queries
+2. code reusablity
+3. Enhanced security
+4. Performance optimisation
+5. Abstraction od Data model changes
+
+Syntax to create views in mySQL is :
+
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+2.  Create a stored procedures that will display the employee details based on the given dept name.  Dept name is the input for stored procedure.   
+
+->
+USE apr2024;
+
+DELIMITER //
+CREATE PROCEDURE emp_details(IN p_dept_no INT)
+BEGIN 
+SELECT  * FROM emps WHERE deptno=p_dept_no;
+END//
+DELIMITER ;
+
+CALL emp_details(1);
+
+3. Create stored procedures that get employees count who are having greater salary than the average of all salaries.  Return employees count  as output variable. 
+
+->
+DELIMITER //
+
+CREATE PROCEDURE getEmployeeCount(OUT employeeCount INT)
+BEGIN
+    DECLARE averageSalary DECIMAL(10, 2);
+    
+    -- Calculate the average salary
+    SELECT AVG(salary) INTO averageSalary FROM emps;
+    
+    -- Get the count of employees with salary greater than the average
+    SELECT COUNT(*) INTO employeeCount FROM emps WHERE salary > averageSalary;
+END //
+
+DELIMITER ;
+
+4. Create stored procedures that insert the data into emp table. Take all the required values as input parameters. 
+->DELIMITER //
+CREATE PROCEDURE enter_data(IN empno INT,IN ename VARCHAR(50),IN job VARCHAR(50), IN salary FLOAT,IN deptno INT)
+BEGIN 
+INSERT INTO emps(empno,ename,job,salary,deptno) VALUES (empno,ename,job,salary,deptno);
+END //
+DELIMITER ;
+
+CALL enter_data(3,'basu','tester',30000,2);
+
+
+5. Create View to return employee job and corresponding  max salary in each job.  
+->
+CREATE VIEW MaxSalJob AS
+SELECT job, MAX(salary) AS max_salary
+FROM emp
+GROUP BY job;
+
+
+6.  How to use distinct option in select query? 
+->we can use keyword distinct in the query
+
+SYNTAX:  SELECT DISTINCT column1
+          FROM table_name;
+
+EX:  SELECT DISTINCT department
+     FROM employees;
+
+7.Create ProductsLogs table to store the following information. 
+		 Eg:	  Id, Operation, ProductId, ProductName,  Date, Time,  Message 
+		
+		Hint: Target the Products table.
+
+->
+  CREATE TABLE productLogTable(
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    operation VARCHAR(100) ,
+    productId INT,
+    productName VARCHAR(50),
+    date DATE,
+    time TIME ,
+    message TEXT);
+    
+    INSERT INTO productLogTable(Id,operation,productId,productName,date,time,message) 
+    VALUES ('delete operation',10,'santoor',curdate(),curtime(),'data was deleted');
+    
+    SELECT * FROM productLogTable;
+
+
+8.    Create  a AFTER INSERT trigger operation  and  insert the corresponding details ProductsLogs table. 
+->
+DELIMITER //
+CREATE TRIGGER AfterProductInsert
+AFTER INSERT ON Products
+FOR EACH ROW
+BEGIN
+    INSERT INTO ProductsLogs (Operation, ProductId, ProductName, Date, Time, Message)
+    VALUES ('INSERT', NEW.Id, NEW.ProductName, CURDATE(), CURTIME(), 'Product inserted');
+END;
+//
+DELIMITER
+
+
+9.  Create  a AFTER DELETE trigger operation  and  insert the corresponding details ProductsLogs table with corresponding message. 
+
+->
+
+DELIMITER //
+CREATE TRIGGER AfterProductDelete
+AFTER DELETE ON Products
+FOR EACH ROW
+BEGIN
+    INSERT INTO ProductsLogs (Operation, ProductId, ProductName, Date, Time, Message)
+    VALUES ('DELETE', OLD.Id, OLD.ProductName, CURDATE(), CURTIME(), 'Product deleted');
+END;
+//
+DELIMITER
+
+
+
+
+ 
+
+
+
