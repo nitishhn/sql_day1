@@ -1,0 +1,161 @@
+Assignments-2
+~~~~~~~~~~~~
+		Create an array of product objects and each product object should include the following properties.
+
+		properties:		id, pname, price, qty,  category 
+
+->  
+
+const products = [
+  { id: 101, pname: "santoor", price: "20", qty: 5, category: "soap" },
+  { id: 102, pname: "clinic", price: "5", qty: 5, category: "shampoo" },
+  { id: 103, pname: "redmi", price: 12000, qty: 1, category: "phone" },
+  { id: 104, pname: "lg", price: 122000, qty: 1, category: "television" },
+];
+
+
+ a.  display the product details based on the given product id	
+->
+
+function displayProductDetails(pId) {
+  const product = products.find((product) => product.id === pId);
+
+  if (product) {
+    console.log("Product ID:", product.id);
+    console.log("Product Name:", product.pname);
+    console.log("Price:", product.price);
+    console.log("Quantity:", product.qty);
+    console.log("Category:", product.category);
+  } else {
+    console.log("Product not found");
+  }
+}
+
+displayProductDetails(102);
+
+
+ b.  display the product names and unit price based on the given category
+
+function displayNamePrice(p_category){
+const product=products.find((product)=>product.category===p_category);
+if(product){
+console.log(product.pname);
+console.log(product.price)
+}else{
+
+console.log("category not found");
+}
+
+}
+
+displayNamePrice(phone);
+
+
+
+
+ c.   add new product to array
+->
+
+function addProduct(new_product) {
+  products.push(new_product);
+}
+
+const new_product = {
+  id: 105,
+  pname: "dove",
+  price: 25,
+  qty: 6,
+  category: "soap",
+};
+
+addProduct(new_product);
+
+console.log(products);
+
+
+
+ 
+	  d.   delete the product based on the product id 
+->
+    function deleteProduct(productId) {
+    products = products.filter(product => product.id !== productId);
+}
+
+
+deleteProduct(102);
+
+console.log("Updated products array:", products);
+
+
+	  e.   display the product details based on the range of price (min, max) 
+
+->  function displayProductsByPriceRange(minPrice, maxPrice) {
+    const productsInRange = products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+
+    if (productsInRange.length > 0) {
+        console.log("Products within price range:", minPrice, "-", maxPrice);
+        productsInRange.forEach(product => {
+            console.log("Product ID:", product.id);
+            console.log("Product Name:", product.pname);
+            console.log("Price:", product.price);
+            console.log("Quantity:", product.qty);
+            console.log("Category:", product.category);
+            console.log("---------------------------------");
+        });
+    } else {
+        console.log("No products found within the specified price range:", minPrice, "-", maxPrice);
+    }
+}
+
+
+displayProductsByPriceRange(10, 500);
+
+
+
+
+	  f.    display out of stock products  (i.e qty is zero)
+
+->
+
+function displayOutOfStockProducts() {
+    const outOfStockProducts = products.filter(product => product.qty === 0);
+
+    if (outOfStockProducts.length > 0) {
+        console.log("Out of stock products:");
+        outOfStockProducts.forEach(product => {
+            console.log("Product ID:", product.id);
+            console.log("Product Name:", product.pname);
+            console.log("Price:", product.price);
+            console.log("Quantity:", product.qty);
+            console.log("Category:", product.category);
+         
+        });
+    } else {
+        console.log("No out-of-stock products found.");
+    }
+}
+
+
+displayOutOfStockProducts();
+
+
+
+
+	  g.   perform sorting the array based on the price 
+
+->   function sortByPrice() {
+    products.sort((a, b) => a.price - b.price);
+}
+
+// Before sorting
+console.log("Products before sorting:", products);
+
+// Sort the products array based on price
+sortByPrice();
+
+// After sorting
+console.log("Products after sorting based on price:", products);
+
+
+
+

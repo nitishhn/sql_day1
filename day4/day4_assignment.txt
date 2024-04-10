@@ -1,0 +1,89 @@
+1.What Is a Regular Expression?
+->A regular expression is a sequence of characters that forms a search pattern.
+  When you search for data in a text, you can use this search pattern to describe what you are searching for.
+ A regular expression can be a single character, or a more complicated pattern.
+Regular expressions can be used to perform all types of text search and text replace operations
+
+
+2. How to use Regular Expression?
+->
+Ex 1:
+We use a string to do a search for "school" in a string:
+
+    let text = "Visit school!";
+let n = text.search("school");
+
+Ex 2:
+ We use a regular expression to do a case-insensitive search for "school" in a string:
+let text = "Visit School";
+let n = text.search(/school/i);
+
+
+Ex 3:
+
+The replace() method replaces a specified value with another value in a string:
+let text = "Visit Microsoft!";
+let result = text.replace("Microsoft", "Hexaware");
+
+Ex4 :
+
+Use a case insensitive regular expression to replace Microsoft with Hexaware in a string:
+
+let text = "Visit Microsoft!";
+let result = text.replace(/microsoft/i, "hexaware");
+
+
+3. Array Methods in javascript
+->
+
+   a.The map() method of Array instances creates a new array populated with the results of calling a provided function on every element in the calling array.
+     Ex:
+const array1 = [1, 4, 9, 16];
+
+// Pass a function to map
+const map1 = array1.map((x) => x * 2);
+
+console.log(map1);
+// Expected output: Array [2, 8, 18, 32]
+
+
+  b.The find() method of Array instances returns the first element in the provided array that satisfies the provided testing function.
+ If no values satisfy the testing function, undefined is returned.
+
+  Ex :const array1 = [5, 12, 8, 130, 44];
+
+const found = array1.find((element) => element > 10);
+
+console.log(found);
+// Expected output: 12
+
+  c.FindIndex()
+The findIndex() method returns the index (position) of the first element that passes a test.
+
+The findIndex() method returns -1 if no match is found.
+
+The findIndex() method does not execute the function for empty array elements.
+
+EX:const ages = [3, 10, 18, 20];
+       ages.findIndex(checkAge);
+
+   function checkAge(age) {
+    return age > 18;
+     }
+
+d.The filter() method creates a new array filled with elements that pass a test provided by a function.
+The filter() method does not execute the function for empty elements.
+The filter() method does not change the original array.
+EX:
+   const ages = [32, 33, 16, 40];
+const result = ages.filter(checkAdult);
+
+function checkAdult(age) {
+  return age >= 18;
+}
+
+
+
+
+
+

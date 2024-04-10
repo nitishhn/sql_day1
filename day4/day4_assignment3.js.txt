@@ -1,0 +1,72 @@
+Assignments-3
+~~~~~~~~~~~~~
+
+
+a.  How to extract only values from the object?
+	
+->
+To extract only the values from an object in JavaScript, you can use various methods such as Object.values(), 
+for...in loop, or a combination of methods like Object.keys() with .map() or .forEach().
+
+a.Using Object.values():
+
+
+const obj = { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" };
+
+const values = Object.values(obj);
+console.log(values); // Output: [101, "santoor", 20, 5, "soap"]
+
+b. Using for...in loop:
+
+const obj = { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" };
+
+const values = [];
+for (let key in obj) {
+    values.push(obj[key]);
+}
+console.log(values); // Output: [101, "santoor", 20, 5, "soap"];
+
+c. Using Object.keys() with .map():
+
+
+const obj = { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" };
+
+const values = Object.keys(obj).map(key => obj[key]);
+console.log(values); // Output: [101, "santoor", 20, 5, "soap"]
+
+4. Using Object.keys() with .forEach():
+
+const obj = { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" };
+
+const values = [];
+Object.keys(obj).forEach(key => {
+    values.push(obj[key]);
+});
+console.log(values); // Output: [101, "santoor", 20, 5, "soap"]
+
+
+
+
+	b.  How to clone the object?
+->
+To clone an object in JavaScript, you can use various methods depending on your requirements. One common approach is to use the Object.assign()
+ method or the spread syntax (...). Here's how you can do it:
+
+a.Using Object.assign():
+
+const obj = { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" };
+
+// Cloning using Object.assign()
+const clonedObj = Object.assign({}, obj);
+
+console.log(clonedObj); // Output: { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" }
+
+b. Using spread syntax (...):
+
+
+const obj = { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" };
+
+// Cloning using spread syntax
+const clonedObj = { ...obj };
+
+console.log(clonedObj); // Output: { id: 101, pname: "santoor", price: 20, qty: 5, category: "soap" }
