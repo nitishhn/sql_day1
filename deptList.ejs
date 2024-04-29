@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style>
+            h3{
+                color : blue;
+                text-align: center;
+            }
+
+            div
+            {
+                border: 2px solid blue;
+                margin: 10px;
+                padding : 5px;
+
+            }
+
+        </style>
+    </head>
+    <body>
+        <h3>This is my first view page created using EJS View Engine</h3>
+        <hr/>
+
+
+        <h2>All Department Details Page</h2>
+
+        <table width="500"  border="2">
+                <tr>
+                    <th>Dept Number</th>
+                    <th>Dept Name</th>
+                    <th>Dept Location</th>
+                </tr>
+
+
+                <%
+                    for(let item of deptsArray)  
+                    {
+                %>
+
+                    <tr>
+                        <td> <%=item.deptno%> </td>
+                        <td> <%=item.dname%> </td>
+                        <td> <%=item.loc%> </td>
+                    </tr>
+
+                <%  } %>
+
+
+        </table>
+        
+    </body>
+</html>
